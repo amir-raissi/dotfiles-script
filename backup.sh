@@ -30,7 +30,7 @@ echo -e "Generating installed package lists ✍️✍️✍️"
 now=$(date +%D)
 nowF=${now//\//-}
 echo -e "Compressing dotfiles 🗜️"
-tar -czf .dotfiles/dotfiles-$nowF.tar.gz .dotfiles/*
+tar -czf .dotfiles/dotfiles-$nowF.tar.gz .dotfiles/.
 
 echo -e "Cleaning up 🧹"
 sed '/^[ \t]*$/d' $backupPaths | while read filePath; do
