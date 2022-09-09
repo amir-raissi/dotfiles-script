@@ -8,6 +8,9 @@ sameLine="\e[1A\e[K"
 
 echo -e "Starting Backup 🐎🐎🐎"
 
+echo -e "Removing old dotfiles 🗑️"
+rm -fr .dotfiles/*
+
 sed '/^[ \t]*$/d' $backupPaths | while read filePath; do
     echo -e "Backing-up $filePath"
 
@@ -15,8 +18,7 @@ sed '/^[ \t]*$/d' $backupPaths | while read filePath; do
     replaceWith="$homeDir/"
     originalFile="${filePath//${findThis}/${replaceWith}}"
 
-    rsync -av $originalFile .dotfiles/
-
+    cp -r $originalFile .dotfiles/
     sleep 0.05
 done
 
@@ -29,6 +31,8 @@ echo -e "Generating installed package lists ✍️✍️✍️"
 now=$(date +%D)
 
 cd .dotfiles/
+
+echo -e "Committing Dotfiles 📝📝📝"
 
 git add .
 git commit -m "$now"
